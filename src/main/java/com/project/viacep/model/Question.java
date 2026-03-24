@@ -28,7 +28,6 @@ public class Question {
 
     private Integer orderIndex;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AnswerOption> option;
 }
