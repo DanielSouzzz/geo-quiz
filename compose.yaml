@@ -1,10 +1,35 @@
-version: "3.8"
+version: "3.9"
+
 services:
-  app:
+  db-quiz:
+    image: mysql:8.0
+    container_name: quiz-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: quiz
+      MYSQL_DATABASE: quiz
+      MYSQL_USER: quiz
+      MYSQL_PASSWORD: quiz
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - quiz-net
+
+  app-quiz:
     build: .
+    image: geoquiz:latest
+    container_name: geo-quiz
     ports:
       - "8080:8080"
     environment:
       - JAVA_OPTS=-Xmx512m
-    volumes:
-      - .:/usr/src/app
+      - APP_NAME=GeoQuiz
+    networks:
+      - quiz-net
+
+volumes:
+  mysql_data:
+
+networks:
+  quiz-net:
+    driver: bridge
