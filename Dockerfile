@@ -1,5 +1,5 @@
 # Etapa de build com Maven
-FROM maven:3.8.5-amazoncorretto-17 AS build
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 
 WORKDIR /usr/src/app
 
@@ -15,7 +15,7 @@ FROM amazoncorretto:17-alpine
 WORKDIR /app
 
 # Copia o JAR final
-COPY --from=build /usr/src/app/target/geoquiz-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /usr/src/app/target/*.jar app.jar
 
 EXPOSE 8080
 
