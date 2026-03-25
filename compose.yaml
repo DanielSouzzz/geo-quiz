@@ -14,6 +14,11 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - quiz-net
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "quiz", "-pquiz" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app-quiz:
     build: .
@@ -26,6 +31,9 @@ services:
       - APP_NAME=GeoQuiz
     networks:
       - quiz-net
+    depends_on:
+      db-quiz:
+        condition: service_healthy
 
 volumes:
   mysql_data:
