@@ -2,7 +2,7 @@ package com.project.viacep.service;
 
 import com.google.gson.Gson;
 import com.project.viacep.model.dto.CepDTO;
-import com.project.viacep.model.CepResponse;
+import com.project.viacep.model.dto.CepResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class CepService {
         try {
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-            CepResponse cepResponse = new Gson().fromJson(response.body(), CepResponse.class);
+            CepResponseDTO cepResponse = new Gson().fromJson(response.body(), CepResponseDTO.class);
             return new CepDTO(cepResponse);
 
         } catch (IOException | InterruptedException e) {
