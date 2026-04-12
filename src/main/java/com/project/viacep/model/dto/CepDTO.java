@@ -1,6 +1,5 @@
 package com.project.viacep.model.dto;
 
-import com.project.viacep.model.CepResponse;
 import lombok.AllArgsConstructor;
 
 @lombok.Data
@@ -12,7 +11,7 @@ public class CepDTO {
     private String localidade;
     private String uf;
 
-    public CepDTO(CepResponse cepResponse) {
+    public CepDTO(CepResponseDTO cepResponse) {
         this.logradouro = cepResponse.logradouro();
         this.bairro = cepResponse.bairro();
         this.localidade = cepResponse.localidade();
